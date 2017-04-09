@@ -1,0 +1,15 @@
+import serial
+import time
+
+port= serial.Serial('/dev/ttyAMA0',4800,timeout=100)
+port.close()
+if(port.isOpen()==False):
+	port.open()
+port.flushOutput()
+time.sleep(1)
+while True:
+	stri="Pls Raspi.."
+	port.write(stri)
+	time.sleep(1)
+	print(stri)
+port.close()
