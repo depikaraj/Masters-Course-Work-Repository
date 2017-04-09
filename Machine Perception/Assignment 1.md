@@ -1,1 +1,0 @@
-Basic Image Processing Excercises .
