@@ -1,29 +1,24 @@
-#This target will compile all the files mentioned
+#Variable Declaration 
+#Two variables here : CC(COmpiler type) and CFLAGS(flag specs) 
+CC=g++
 
-#3 object files for 3 cpp files
-all: hello
+#WALL for Warning
+CFLAGS=-c -Wall
 
-#3 dependencies, target is hello (in turn "all")
+all:hello
+
 hello: main.o function1.o function2.o
-	g++ main.o function1.o function2.o -o hello 
-#command
-
-#after colon with space is called dependency, if Dependency is satisfied then command is executed
-#Target: Dependency
+	$(CC) main.o function1.o function2.o -o hello
 
 main.o: main.cpp
-	g++ -c main.cpp 
-
-#Command
-#execute this -c = compile
+	$(CC) $(CFLAGS) main.cpp
 
 function1.o: function1.cpp
-	g++ -c function1.cpp
+	$(CC) $(CFLAGS) function1.cpp
 
 function2.o: function2.cpp
-	g++ -c function2.cpp
+	$(CC) $(CFLAGS) function2.cpp
 
-#remove object files
 clean:
 	rm -rf *o hello
 	
