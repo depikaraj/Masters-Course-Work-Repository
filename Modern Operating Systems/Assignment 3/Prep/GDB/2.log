@@ -1,0 +1,351 @@
+Script started on Saturday 22 April 2017 10:43:13 AM IST
+I can mend the break of day, heal a broken heart, and provide temporary
+relief to nymphomaniacs.
+		-- Larry Lee
+]0;jarvis@jarvis: ~/Sem2/mos/assignment 3/prep/learn/gdb[01;32mjarvis@jarvis[00m:[01;34m~/Sem2/mos/assignment 3/prep/learn/gdb[00m$ echo Assembly C progra,[Km
+Assembly C program
+]0;jarvis@jarvis: ~/Sem2/mos/assignment 3/prep/learn/gdb[01;32mjarvis@jarvis[00m:[01;34m~/Sem2/mos/assignment 3/prep/learn/gdb[00m$ ls
+1.log  2.log  [0m[01;32ma.out[0m  append  asm_example.c  [01;32md[0m  [01;32mdebug[0m  debug.c  ftest.c
+]0;jarvis@jarvis: ~/Sem2/mos/assignment 3/prep/learn/gdb[01;32mjarvis@jarvis[00m:[01;34m~/Sem2/mos/assignment 3/prep/learn/gdb[00m$ gcc -g asm_example.c -o as m
+]0;jarvis@jarvis: ~/Sem2/mos/assignment 3/prep/learn/gdb[01;32mjarvis@jarvis[00m:[01;34m~/Sem2/mos/assignment 3/prep/learn/gdb[00m$ gdb asm
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.04) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from asm...done.
+(gdb) list
+1	#include<stdio.h>
+2	int main()
+3	{
+4		int a=1;
+5		int b=2;
+6		int c=3;
+7		a+=b;
+8		a=a+c;
+9		printf("Value of a is %d", a);
+10		return 0;
+(gdb) info 1,10
+Undefined info command: "1,10".  Try "help info".
+(gdb) list 1,10
+1	#include<stdio.h>
+2	int main()
+3	{
+4		int a=1;
+5		int b=2;
+6		int c=3;
+7		a+=b;
+8		a=a+c;
+9		printf("Value of a is %d", a);
+10		return 0;
+(gdb) info b
+No breakpoints or watchpoints.
+(gdb) b main
+Breakpoint 1 at 0x40052e: file asm_example.c, line 4.
+(gdb) info b
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x000000000040052e in main at asm_example.c:4
+(gdb) run
+Starting program: /home/jarvis/Sem2/mos/assignment 3/prep/learn/gdb/asm 
+
+Breakpoint 1, main () at asm_example.c:4
+4		int a=1;
+(gdb) disass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+=> 0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+   0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) nexti
+5		int b=2;
+(gdb) nextidisass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+=> 0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+   0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) disass[1Pnextidisass[K[K[K[K[K[Kprint a
+$1 = 1
+(gdb) print b
+$2 = 0
+(gdb) print &a
+$3 = (int *) 0x7fffffffdc44
+(gdb) x /d $esp[K[K[K[K[K[K[K[K[Kprint &a[1Pba[1Pdisass[1Pnexti
+6		int c=3;
+(gdb) nextiprint &a[1Pba[1Pdisass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+=> 0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+   0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) info reg
+rax            0x400526	4195622
+rbx            0x0	0
+rcx            0x0	0
+rdx            0x7fffffffdd48	140737488346440
+rsi            0x7fffffffdd38	140737488346424
+rdi            0x1	1
+rbp            0x7fffffffdc50	0x7fffffffdc50
+rsp            0x7fffffffdc40	0x7fffffffdc40
+r8             0x4005e0	4195808
+r9             0x7ffff7de78e0	140737351940320
+r10            0x846	2118
+r11            0x7ffff7a2e740	140737348036416
+r12            0x400430	4195376
+r13            0x7fffffffdd30	140737488346416
+r14            0x0	0
+r15            0x0	0
+rip            0x40053c	0x40053c <main+22>
+eflags         0x202	[ IF ]
+cs             0x33	51
+ss             0x2b	43
+ds             0x0	0
+es             0x0	0
+fs             0x0	0
+---Type <return> to continue, or q <return> to quit---q
+Quit
+(gdb) info reg[C[C[C[C[C[C[2Pdisass[1Pnexti
+7		a+=b;
+(gdb) nextiinfo reg[C[C[C[C[C[C[2Pdisass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+=> 0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+   0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) disass[1Pnexti
+0x0000000000400546	7		a+=b;
+(gdb) nextidisass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+=> 0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+   0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) disass[1Pnexti
+8		a=a+c;
+(gdb) nextidisass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+=> 0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+   0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) disass[1Pnexti
+0x000000000040054c	8		a=a+c;
+(gdb) nextidisass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+=> 0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+   0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) disass[1Pnexti
+9		printf("Value of a is %d", a);
+(gdb) nexti
+0x0000000000400552	9		printf("Value of a is %d", a);
+(gdb) nexti
+0x0000000000400554	9		printf("Value of a is %d", a);
+(gdb) nextidisass[1Pnextidisass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+=> 0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+   0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) disass[1Pnexti
+0x0000000000400559	9		printf("Value of a is %d", a);
+(gdb) nextidisass[1Pnexti
+0x000000000040055e	9		printf("Value of a is %d", a);
+(gdb) nextidisass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+=> 0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) d 1
+(gdb) info b
+No breakpoints or watchpoints.
+(gdb) b 9
+Breakpoint 2 at 0x40054f: file asm_example.c, line 9.
+(gdb) b 9info b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x000000000040054f in main at asm_example.c:9
+(gdb) disass
+Dump of assembler code for function main:
+   0x0000000000400526 <+0>:	push   %rbp
+   0x0000000000400527 <+1>:	mov    %rsp,%rbp
+   0x000000000040052a <+4>:	sub    $0x10,%rsp
+   0x000000000040052e <+8>:	movl   $0x1,-0xc(%rbp)
+   0x0000000000400535 <+15>:	movl   $0x2,-0x8(%rbp)
+   0x000000000040053c <+22>:	movl   $0x3,-0x4(%rbp)
+   0x0000000000400543 <+29>:	mov    -0x8(%rbp),%eax
+   0x0000000000400546 <+32>:	add    %eax,-0xc(%rbp)
+   0x0000000000400549 <+35>:	mov    -0x4(%rbp),%eax
+   0x000000000040054c <+38>:	add    %eax,-0xc(%rbp)
+   0x000000000040054f <+41>:	mov    -0xc(%rbp),%eax
+   0x0000000000400552 <+44>:	mov    %eax,%esi
+   0x0000000000400554 <+46>:	mov    $0x4005f4,%edi
+   0x0000000000400559 <+51>:	mov    $0x0,%eax
+=> 0x000000000040055e <+56>:	callq  0x400400 <printf@plt>
+   0x0000000000400563 <+61>:	mov    $0x0,%eax
+   0x0000000000400568 <+66>:	leaveq 
+   0x0000000000400569 <+67>:	retq   
+End of assembler dump.
+(gdb) stepi
+0x0000000000400400 in printf@plt ()
+(gdb) stepidisass
+Dump of assembler code for function printf@plt:
+=> 0x0000000000400400 <+0>:	jmpq   *0x200c12(%rip)        # 0x601018
+   0x0000000000400406 <+6>:	pushq  $0x0
+   0x000000000040040b <+11>:	jmpq   0x4003f0
+End of assembler dump.
+(gdb) q
+A debugging session is active.
+
+	Inferior 1 [process 7679] will be killed.
+
+Quit anyway? (y or n) y
+]0;jarvis@jarvis: ~/Sem2/mos/assignment 3/prep/learn/gdb[01;32mjarvis@jarvis[00m:[01;34m~/Sem2/mos/assignment 3/prep/learn/gdb[00m$ exit
+exit
+
+Script done on Saturday 22 April 2017 10:54:52 AM IST
