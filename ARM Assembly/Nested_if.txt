@@ -1,0 +1,13 @@
+#Implementation of Nested if then else
+
+This version of nested if then else can be implemented in Cortex M4
+
+if(a>b)
+{
+	if(a>c)
+	Statement 1;
+	else
+	Statement 2;
+}
+else
+	Statement 3;
